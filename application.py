@@ -5,16 +5,12 @@ from functools import wraps
 from flask_cors import CORS
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Users, Products, ShoppingCart, tokenBlackList
+from database_setup import Base, Users, Products, ShoppingCart, tokenBlackList, engine
 from config import *
 
 application = Flask(__name__)
 CORS(application)
-application.debug = True
 
-engine = create_engine(DATABASE_URI)
-
-Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
@@ -215,4 +211,5 @@ def passwordRecovery():
 
 
 if __name__ == '__main__':
+	application.debug = True
 	application.run(host='0.0.0.0', port=5000)

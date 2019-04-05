@@ -1,5 +1,5 @@
 import os
-import sys, psycopg2
+import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -8,7 +8,7 @@ from config import *
  
 engine = create_engine(DATABASE_URI)
 Base = declarative_base()
-Base.metadata.create_all(engine) 
+
  
 class Users(Base):
     __tablename__ = 'users'
@@ -69,7 +69,7 @@ class tokenBlackList(Base):
     token = Column(String(250), nullable=False)
     
 
-
+Base.metadata.create_all(engine) 
  
 
 
